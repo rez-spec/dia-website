@@ -95,10 +95,10 @@ function HomePage({ onNav, onSection, sectionRefs }) {
           <div className="wwd-grid">
             {D.whatwedo.map((s, i) =>
             <FadeUp key={s.n} delay={i % 4 * 60}>
-                <div className={cx("wwd-card", "tone-" + i % 6)} onClick={() => onNav("service", D.whatwedoSlugs[s.t])} style={{ height: "461px", opacity: "1" }}>
+                <div className={cx("wwd-card", "tone-" + i % 6)} onClick={() => onNav("service", D.whatwedoSlugs[s.t])} style={{ height: "461px", opacity: "1", justifyContent: "center" }}>
                   <div className="wwd-icon">{Icon.svc && Icon.svc[s.icon] || Icon.svcIcon}</div>
                   <h4>{s.t}</h4>
-                  <p>{s.b}</p>
+                  <p style={{ textAlign: "left" }}>{s.b}</p>
                   <div className="wwd-foot">
                     <button className="wwd-more" onClick={(e) => {e.stopPropagation();onNav("service", D.whatwedoSlugs[s.t]);}}>MORE</button>
                   </div>
@@ -320,7 +320,7 @@ function OurServicesCarousel({ items, onMore, onCardClick }) {
 // ============== CONTACT FORM ==============
 function ContactForm() {
   const COUNTRIES = [
-  { flag: "🇬🇧", code: "+44", name: "United Kingdom" },
+  { flag: "🇬🇧", flagImg: "assets/flag-uk.png", code: "+44", name: "United Kingdom" },
   { flag: "🇪🇬", code: "+20", name: "Egypt" },
   { flag: "🇺🇸", code: "+1", name: "United States" },
   { flag: "🇦🇪", code: "+971", name: "United Arab Emirates" },
@@ -384,14 +384,20 @@ function ContactForm() {
                   <label htmlFor="name">Name</label>
                 </div>
                 <div className="field country" ref={countryRef} onClick={() => setOpen((o) => !o)} style={{ cursor: "pointer", position: "relative" }}>
-                  <span className="flag" style={{ fontSize: 22, lineHeight: 1 }}>{country.flag}</span>
+                  {country.flagImg ?
+                <img src={country.flagImg} alt={country.name} className="flag-img" style={{ width: 30, height: 30, borderRadius: 8, objectFit: "cover" }} /> :
+                <span className="flag" style={{ fontSize: 22, lineHeight: 1 }}>{country.flag}</span>
+                }
                   <span>({country.code})</span>
                   <span className="chev" style={{ transform: open ? "rotate(90deg)" : "rotate(0)", transition: "transform 0.2s" }}>{Icon.chevron}</span>
                   {open &&
                 <div className="country-menu">
                       {COUNTRIES.map((c) =>
                   <button key={c.code} type="button" className={cx("country-opt", c.code === country.code && "on")} onClick={(e) => {e.stopPropagation();setCountry(c);setOpen(false);}}>
-                          <span className="flag" style={{ fontSize: 20 }}>{c.flag}</span>
+                          {c.flagImg ?
+                    <img src={c.flagImg} alt="" style={{ width: 22, height: 22, borderRadius: 6, objectFit: "cover" }} /> :
+                    <span className="flag" style={{ fontSize: 20 }}>{c.flag}</span>
+                    }
                           <span className="country-name">{c.name}</span>
                           <span className="country-code">{c.code}</span>
                         </button>
@@ -442,7 +448,7 @@ function StudioPage({ onNav, onSection }) {
       <section style={{ padding: "140px var(--pad-x) 40px", textAlign: "center" }}>
         <FadeUp>
           <div style={{ display: "inline-flex", gap: 14, alignItems: "center", justifyContent: "center" }}>
-            <span className="slash" style={{ display: "inline-block", width: 14, height: 24, background: "linear-gradient(180deg, #a3906f 0%, #d0b389 100%)", WebkitMask: "url(assets/section-slash.svg) center / contain no-repeat", mask: "url(assets/section-slash.svg) center / contain no-repeat" }}></span>
+            <span className="slash" style={{ display: "inline-block", width: 10, height: 30, background: "linear-gradient(180deg, #a3906f 0%, #d0b389 100%)", transform: "skewX(-18deg)", borderRadius: 2 }}></span>
             <h2 style={{ fontFamily: "var(--f-serif)", fontStyle: "italic", fontSize: "clamp(28px, 3vw, 42px)", color: "#fff", fontWeight: 400, lineHeight: 1.2 }}>{s.tagline}</h2>
           </div>
         </FadeUp>
@@ -475,9 +481,9 @@ function StudioPage({ onNav, onSection }) {
             <div style={{ background: "rgba(94,80,71,0.18)", borderRadius: 40, padding: "44px clamp(36px,4vw,72px)" }}>
               <div className="eyebrow no-rule" style={{ color: "var(--c-tan-soft)", fontSize: 12, letterSpacing: "0.22em", marginBottom: 8 }}>{s.principal.role}</div>
               <h3 className="display" style={{ color: "var(--c-tan-soft)", fontSize: 28, letterSpacing: "0.02em", marginBottom: 24, fontFamily: "var(--f-body)", fontWeight: 700 }}>{s.principal.name}</h3>
-              {s.principal.bio.map((p, i) => (
-                <p key={i} style={{ fontFamily: "var(--f-body)", fontSize: 16, lineHeight: "26px", color: "#fff", marginBottom: 14 }}>{p}</p>
-              ))}
+              {s.principal.bio.map((p, i) =>
+              <p key={i} style={{ fontFamily: "var(--f-body)", fontSize: 16, lineHeight: "26px", color: "#fff", marginBottom: 14 }}>{p}</p>
+              )}
             </div>
           </FadeUp>
         </div>
@@ -490,11 +496,11 @@ function StudioPage({ onNav, onSection }) {
             <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 18, fontFamily: "var(--f-body)", fontWeight: 700 }}>A BLEND OF TALENT AND CREATIVITY</h3>
             <p className="about-p" style={{ marginBottom: 40, color: "#fff", maxWidth: 1280, marginLeft: 0, textAlign: "left", fontSize: 16, lineHeight: "26px" }}>{s.teamIntro}</p>
             <div style={{ display: "flex", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
-              {[1,2,3,4,5].map((i) => (
-                <div key={i} style={{ width: 130, height: 160, borderRadius: 18, background: "#171615", border: "1px solid rgba(208,179,137,0.18)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(208,179,137,0.45)", fontFamily: "ui-monospace, monospace", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              {[1, 2, 3, 4, 5].map((i) =>
+              <div key={i} style={{ width: 130, height: 160, borderRadius: 18, background: "#171615", border: "1px solid rgba(208,179,137,0.18)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(208,179,137,0.45)", fontFamily: "ui-monospace, monospace", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase" }}>
                   Team {String(i).padStart(2, "0")}
                 </div>
-              ))}
+              )}
             </div>
             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 28 }}>
               <button className="why-more">MEET THE FULL TEAM</button>
@@ -509,14 +515,14 @@ function StudioPage({ onNav, onSection }) {
           <FadeUp>
             <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 32, fontFamily: "var(--f-body)", fontWeight: 700, textTransform: "uppercase" }}>WHAT MAKES US DIFFERENT</h3>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }} className="diff-grid">
-              {s.differentiators.map((d, i) => (
-                <FadeUp key={i} delay={(i % 2) * 60} style={{ background: "rgba(94,80,71,0.22)", borderRadius: 30, padding: "22px 28px", display: "flex", alignItems: "center", gap: 22 }}>
+              {s.differentiators.map((d, i) =>
+              <FadeUp key={i} delay={i % 2 * 60} style={{ background: "rgba(94,80,71,0.22)", borderRadius: 30, padding: "22px 28px", display: "flex", alignItems: "center", gap: 22 }}>
                   <span style={{ width: 56, height: 56, borderRadius: 16, background: "rgba(208,179,137,0.18)", display: "inline-flex", alignItems: "center", justifyContent: "center", color: "var(--c-tan)", flexShrink: 0 }}>
                     {Icon.svc && Icon.svc.newBuild}
                   </span>
                   <span style={{ fontFamily: "var(--f-body)", fontWeight: 700, fontSize: 16, color: "#fff", letterSpacing: "0.04em", textTransform: "uppercase" }}>{d.t}</span>
                 </FadeUp>
-              ))}
+              )}
             </div>
           </FadeUp>
         </div>
@@ -527,9 +533,9 @@ function StudioPage({ onNav, onSection }) {
         <div className="container" style={{ maxWidth: 1620 }}>
           <FadeUp>
             <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 24, fontFamily: "var(--f-body)", fontWeight: 700, textTransform: "uppercase" }}>DESIGN WITH PURPOSE</h3>
-            {s.designPurpose.map((p, i) => (
-              <p key={i} style={{ fontFamily: "var(--f-body)", fontSize: 16, lineHeight: "26px", color: "#fff", marginBottom: 18 }}>{p}</p>
-            ))}
+            {s.designPurpose.map((p, i) =>
+            <p key={i} style={{ fontFamily: "var(--f-body)", fontSize: 16, lineHeight: "26px", color: "#fff", marginBottom: 18 }}>{p}</p>
+            )}
             <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginTop: 40, marginBottom: 18, fontFamily: "var(--f-body)", fontWeight: 700, textTransform: "uppercase" }}>YOUR VISION, OUR EXPERTISE</h3>
             <p style={{ fontFamily: "var(--f-body)", fontSize: 16, lineHeight: "26px", color: "#fff" }}>{s.yourVision}</p>
           </FadeUp>
@@ -542,11 +548,11 @@ function StudioPage({ onNav, onSection }) {
           <FadeUp>
             <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 32, fontFamily: "var(--f-body)", fontWeight: 700, textTransform: "uppercase" }}>GUIDED BY CORE VALUES</h3>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }} className="values-grid">
-              {s.coreValues.map((v, i) => (
-                <FadeUp key={v} delay={i * 50} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(208,179,137,0.18)", borderRadius: 24, padding: "180px 18px 22px", textAlign: "center" }}>
+              {s.coreValues.map((v, i) =>
+              <FadeUp key={v} delay={i * 50} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(208,179,137,0.18)", borderRadius: 24, padding: "180px 18px 22px", textAlign: "center" }}>
                   <div style={{ fontFamily: "var(--f-body)", fontWeight: 700, fontSize: 14, color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase" }}>{v}</div>
                 </FadeUp>
-              ))}
+              )}
             </div>
           </FadeUp>
         </div>
@@ -572,8 +578,8 @@ function StudioPage({ onNav, onSection }) {
       <section className="section" id="contact">
         <ContactForm />
       </section>
-    </div>
-  );
+    </div>);
+
 }
 
 

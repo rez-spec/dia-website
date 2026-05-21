@@ -32,6 +32,16 @@ const Icon = {
     packages: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M16 3l1 2 2 .5-1.5 1.4.4 2-1.9-1-1.9 1 .4-2L13.5 5.5 15.5 5z"/></svg>,
     contact:  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
   },
+  // Social icons — minimal monoline marks
+  social: {
+    ig: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>,
+    fb: <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3.3h-3.1V8.5c0-1 .3-1.6 1.6-1.6h1.7V4a23 23 0 00-2.5-.1c-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.7v8h3.4z"/></svg>,
+    in: <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8.3 18.3H5.7V10h2.6v8.3zM7 8.9a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm11.3 9.4h-2.6v-4c0-1-.02-2.2-1.3-2.2-1.3 0-1.5 1-1.5 2.1v4.1H10.4V10h2.5v1.1c.35-.66 1.2-1.36 2.5-1.36 2.7 0 3.2 1.77 3.2 4.08v4.48z"/></svg>,
+    x: <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 2H21l-6.5 7.5L22.2 22H16l-4.9-6.4L5.5 22H2.7l7-8L1.8 2h6.3l4.4 5.9L18.3 2zm-1 18h1.6L7 3.5H5.3L17.3 20z"/></svg>,
+    yt: <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7s-.2-1.6-.9-2.3c-.85-.9-1.8-.9-2.25-1C16.95 3.5 12 3.5 12 3.5s-4.95 0-7.85.2c-.45.05-1.4.1-2.25 1C1.2 5.4 1 7 1 7s-.2 1.85-.2 3.7v1.6c0 1.85.2 3.7.2 3.7s.2 1.6.9 2.3c.85.9 1.95.85 2.45.95C5.95 19.5 12 19.55 12 19.55s4.95-.05 7.85-.25c.45-.05 1.4-.1 2.25-1 .7-.7.9-2.3.9-2.3s.2-1.85.2-3.7v-1.6C23.2 8.85 23 7 23 7zM9.7 14.6V8.4l6.4 3.1-6.4 3.1z"/></svg>,
+    be: <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7.4 8.7c.7 0 2.1.05 2.1 1.55 0 1.45-.85 1.75-2.15 1.75h-3V8.7h3.05zm.4 7.95c1.45 0 2.4-.6 2.4-2 0-1.4-.8-2.05-2.35-2.05h-3.1v4.05h3.05zm.45-11.05H2v13.8h6.5c3.1 0 5.9-1.4 5.9-4.5 0-1.9-1-3.3-2.85-3.85 1.4-.65 2.05-1.7 2.05-3.2 0-2.65-2.05-3.5-5.4-3.5zM18 12.5c.95 0 1.7.4 1.8 1.55h-3.65c.05-1.2 1-1.55 1.85-1.55zm0-2.4c-3 0-4.5 2.2-4.5 5.1 0 2.95 1.6 5 4.5 5 2 0 3.5-.9 4.25-2.95l-2.3-.05c-.3.5-.85.8-1.85.8-1.1 0-1.85-.65-1.9-1.9h6.3v-.6c0-3.2-1.55-5.4-4.5-5.4zM20 7.5h-4.5v1.3H20v-1.3z"/></svg>,
+    pt: <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.2 2.6 7.8 6.3 9.3-.1-.8-.2-2 0-2.9.1-.5.9-3.5.9-3.5s-.2-.5-.2-1.2c0-1.1.6-2 1.5-2 .7 0 1 .5 1 1.1 0 .7-.4 1.7-.7 2.7-.2.8.4 1.5 1.2 1.5 1.4 0 2.5-1.5 2.5-3.7 0-1.9-1.4-3.3-3.4-3.3-2.3 0-3.7 1.7-3.7 3.6 0 .7.3 1.4.6 1.8l-.2.85c-.04.16-.13.2-.3.12-1.1-.5-1.8-2.1-1.8-3.4 0-2.7 2-5.3 5.7-5.3 3 0 5.3 2.1 5.3 5 0 3-1.9 5.4-4.5 5.4-.9 0-1.7-.5-2-1l-.5 2c-.2.8-.8 1.7-1.1 2.3 1 .3 2 .4 3.1.4 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+  },
   ig: "Ig", fb: "Fb", in: "In", yt: "Yt", x: "X", be: "Bē", tt: "Tt", pt: "Pt"
 };
 
@@ -175,7 +185,15 @@ function BackToTop() {
 
 function Footer({ onNav, onSection }) {
   const D = window.DIA;
-  const socials = ["Ig", "Fb", "In", "X", "Yt", "Be", "Pt"];
+  const socials = [
+    { id: "ig", href: "#", label: "Instagram" },
+    { id: "fb", href: "#", label: "Facebook" },
+    { id: "in", href: "#", label: "LinkedIn" },
+    { id: "x",  href: "#", label: "X" },
+    { id: "yt", href: "#", label: "YouTube" },
+    { id: "be", href: "#", label: "Behance" },
+    { id: "pt", href: "#", label: "Pinterest" }
+  ];
   return (
     <footer className="foot">
       <div className="foot-card">
@@ -218,7 +236,7 @@ function Footer({ onNav, onSection }) {
           </ul>
         </div>
         <div className="foot-social">
-          {socials.map((s, i) => <a key={i} href="#" aria-label="social">{s}</a>)}
+          {socials.map((s) => <a key={s.id} href={s.href} aria-label={s.label}>{Icon.social[s.id]}</a>)}
         </div>
       </div>
       <div className="foot-strip">
