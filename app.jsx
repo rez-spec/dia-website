@@ -4,6 +4,9 @@ function App() {
     if (h.startsWith("project/")) return { page: "project", id: h.slice(8) };
     if (h.startsWith("service/")) return { page: "service", id: h.slice(8) };
     if (h.startsWith("our-service/")) return { page: "our-service", id: h.slice(12) };
+    if (h.startsWith("packages/")) return { page: "packages", id: h.slice(9) };
+    if (h === "packages") return { page: "packages", id: "architecture" };
+    if (h === "services") return { page: "services" };
     if (["projects"].includes(h)) return { page: "projects" };
     if (h === "studio") return { page: "studio" };
     return { page: "home" };
@@ -38,6 +41,8 @@ function App() {
     if (page === "project" && id) window.location.hash = "project/" + id;
     else if (page === "service" && id) window.location.hash = "service/" + id;
     else if (page === "our-service" && id) window.location.hash = "our-service/" + id;
+    else if (page === "packages") window.location.hash = id ? "packages/" + id : "packages";
+    else if (page === "services") window.location.hash = "services";
     else window.location.hash = page;
     window.scrollTo({ top: 0, behavior: "instant" });
   };
@@ -59,13 +64,15 @@ function App() {
   else if (route.page === "project") Page = <ProjectDetail id={route.id} onNav={onNav} />;
   else if (route.page === "service") Page = <ServiceDetailPage slug={route.id} onNav={onNav} />;
   else if (route.page === "our-service") Page = <ServiceCategoryPage id={route.id} onNav={onNav} />;
+  else if (route.page === "services") Page = <ServicesPage onNav={onNav} onSection={onSection} />;
+  else if (route.page === "packages") Page = <PackagesPage kind={route.id} onNav={onNav} onSection={onSection} />;
   else if (route.page === "studio") Page = <StudioPage onNav={onNav} onSection={onSection} />;
   else Page = <HomePage onNav={onNav} onSection={onSection} sectionRefs={sectionRefs} />;
 
   return (
     <React.Fragment>
       <Nav section={activeSection} page={route.page} onNav={onNav} onSection={onSection} />
-      <Rail onSection={onSection} />
+      <Rail onSection={onSection} onNav={onNav} />
       <BackToTop />
       <main>{Page}</main>
       <Footer onNav={onNav} onSection={onSection} />

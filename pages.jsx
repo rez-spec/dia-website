@@ -3,29 +3,33 @@
 // ============== HOME ==============
 function HomePage({ onNav, onSection, sectionRefs }) {
   const D = window.DIA;
+  const featured = D.work.slice(0, 4); // 4 featured projects
 
   return (
     <div className="page-enter">
-      {/* HERO */}
+      {/* HERO — 5-image carousel + CTA */}
       <section style={{ position: "relative" }}>
-        <div className="hero">
-          <div className="hero-bg"><Img src={D.hero.image} label={D.hero.imageLabel} /></div>
-          <div className="hero-tagline">
-            {D.hero.tagline.split("\n").map((line, i) => <div key={i}>{line}</div>)}
-          </div>
-        </div>
+        <HeroCarousel slides={D.hero.slides} tagline={D.hero.tagline} eyebrow={D.hero.eyebrow} onNav={onNav} onSection={onSection} />
       </section>
 
-      {/* ABOUT */}
+      {/* ABOUT — redesigned: 2-col image + intro/quote/body */}
       <section className="section" id="about" ref={(el) => sectionRefs.current.about = el}>
         <div className="container" style={{ maxWidth: 1620 }}>
           <SectionHead>ABOUT US</SectionHead>
           <FadeUp>
-            <div className="about-block">
-              <p className="about-intro">{D.about.intro}</p>
-              {D.about.body.map((p, i) => <p key={i} className="about-p" style={{ marginTop: 10 }}>{p}</p>)}
-              <div className="about-foot">
-                <button className="why-more" onClick={() => onNav("projects")}>MORE</button>
+            <div className="about-grid-2">
+              <div className="about-image">
+                <Img src="assets/about-hero.jpg" label="DiA · the studio" />
+              </div>
+              <div className="about-content">
+                <p className="about-intro">{D.about.intro}</p>
+                <div className="about-quote">
+                  "We are dedicated to bringing transformative designs to life — one project at a time."
+                </div>
+                {D.about.body.map((p, i) => <p key={i} className="about-p">{p}</p>)}
+                <div className="about-foot">
+                  <button className="btn-pill" onClick={() => onNav("studio")}>MORE ABOUT US</button>
+                </div>
               </div>
             </div>
           </FadeUp>
@@ -46,35 +50,49 @@ function HomePage({ onNav, onSection, sectionRefs }) {
               )}
             </div>
             <div className="why-foot">
-              <button className="why-more" onClick={() => onNav("projects")}>MORE</button>
+              <button className="btn-pill" onClick={() => onNav("projects")}>SEE OUR WORK</button>
             </div>
           </FadeUp>
         </div>
       </section>
 
-      {/* HERO IMAGE BAND */}
-      <section style={{ padding: "60px var(--pad-x)" }}>
-        <div className="container" style={{ maxWidth: 1740 }}>
-          <FadeUp>
-            <div style={{ aspectRatio: "1732 / 842", borderRadius: 50, overflow: "hidden" }}>
-              <Img src="assets/about-hero.jpg" label="ABOUT BAND · interior" style={{ width: "100%", height: "100%" }} />
-            </div>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* STATS */}
+      {/* STATS — animated counters on scroll */}
       <section style={{ padding: "0 var(--pad-x) 60px" }}>
         <div className="container" style={{ maxWidth: 1620 }}>
           <FadeUp>
             <div className="card stats-card">
               {D.stats.map((s, i) =>
-              <div key={i} className="stat">
-                  <div className="stat-num">{s.n.replace("+", "")}{s.n.includes("+") && <span className="plus">+</span>}</div>
-                  <div className="stat-label">{s.t}</div>
-                  <div className="stat-sub">{s.s}</div>
-                </div>
+                <Stat key={i} value={s.n} label={s.t} sub={s.s} delay={i * 120} />
               )}
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* FEATURED WORK — selected projects strip */}
+      <section className="section" style={{ paddingTop: 24 }}>
+        <div className="container" style={{ maxWidth: 1620 }}>
+          <SectionHead>SELECTED WORK</SectionHead>
+          <FadeUp>
+            <div className="featured-grid">
+              {featured.map((p, i) => (
+                <FadeUp key={p.id} delay={i * 60} className="featured-card" as="article">
+                  <div className="featured-img" onClick={() => onNav("project", p.id)}>
+                    <Img src={p.cover} label={p.coverLabel} />
+                    <div className="featured-img-overlay"></div>
+                    <div className="featured-img-meta">
+                      <span className="featured-tag">{p.typology} · {p.year}</span>
+                    </div>
+                  </div>
+                  <div className="featured-body" onClick={() => onNav("project", p.id)}>
+                    <h4>{p.name}</h4>
+                    <div className="featured-loc">{p.location} · {p.area}</div>
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
+            <div className="featured-foot">
+              <button className="btn-pill outline" onClick={() => onNav("projects")}>VIEW ALL PROJECTS</button>
             </div>
           </FadeUp>
         </div>
@@ -84,7 +102,7 @@ function HomePage({ onNav, onSection, sectionRefs }) {
       <section className="section" id="services" ref={(el) => sectionRefs.current.services = el}>
         <div className="container" style={{ maxWidth: 1620 }}>
           <SectionHead>OUR SERVICES</SectionHead>
-          <OurServicesCarousel items={D.ourServices} onMore={() => onNav("our-service", D.ourServices[0].id)} onCardClick={(id) => onNav("our-service", id)} />
+          <OurServicesCarousel items={D.ourServices} onMore={() => onNav("services")} onCardClick={(id) => onNav("our-service", id)} />
         </div>
       </section>
 
@@ -115,6 +133,99 @@ function HomePage({ onNav, onSection, sectionRefs }) {
       </section>
     </div>);
 
+}
+
+// ============== HERO CAROUSEL ==============
+function HeroCarousel({ slides, tagline, eyebrow, onNav, onSection }) {
+  const [idx, setIdx] = React.useState(0);
+  const len = slides.length;
+
+  React.useEffect(() => {
+    const id = setInterval(() => setIdx((i) => (i + 1) % len), 6000);
+    return () => clearInterval(id);
+  }, [len]);
+
+  const go = (delta) => setIdx((i) => (i + delta + len) % len);
+
+  return (
+    <div className="hero hero-carousel">
+      <div className="hero-bg">
+        {slides.map((s, i) => (
+          <div key={i} className={cx("hero-slide", i === idx && "on")}>
+            <Img src={s.src} label={s.label} />
+          </div>
+        ))}
+      </div>
+
+      <div className="hero-content">
+        <div className="hero-eyebrow-pill">{eyebrow}</div>
+        <h1 className="hero-tagline-display">
+          {tagline.split("\n").map((line, i) => <div key={i}>{line}</div>)}
+        </h1>
+        <div className="hero-cta">
+          <button className="btn-pill large" onClick={() => onNav("projects")}>VIEW OUR WORK</button>
+          <button className="btn-pill large outline" onClick={() => onSection("contact")}>START A PROJECT</button>
+        </div>
+      </div>
+
+      <div className="hero-dots">
+        {slides.map((_, i) => (
+          <button key={i} className={cx("hero-dot", i === idx && "on")} onClick={() => setIdx(i)} aria-label={"Hero slide " + (i + 1)}></button>
+        ))}
+      </div>
+
+      <button className="hero-arrow prev" onClick={() => go(-1)} aria-label="Previous slide">
+        <span style={{ display: "inline-block", transform: "rotate(180deg)" }}>{Icon.chevron}</span>
+      </button>
+      <button className="hero-arrow next" onClick={() => go(1)} aria-label="Next slide">
+        {Icon.chevron}
+      </button>
+    </div>
+  );
+}
+
+// ============== STAT (animated counter) ==============
+function Stat({ value, label, sub, delay = 0 }) {
+  const target = parseInt(String(value).replace(/[^\d]/g, ""), 10) || 0;
+  const hasPlus = String(value).includes("+");
+  const ref = React.useRef(null);
+  const [n, setN] = React.useState(0);
+  const [seen, setSeen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!ref.current) return;
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => {
+        if (e.isIntersecting && !seen) { setSeen(true); io.disconnect(); }
+      });
+    }, { threshold: 0.4 });
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, [seen]);
+
+  React.useEffect(() => {
+    if (!seen) return;
+    const start = performance.now() + delay;
+    const dur = 1400;
+    let raf;
+    const tick = (t) => {
+      const p = Math.max(0, Math.min(1, (t - start) / dur));
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - p, 3);
+      setN(Math.round(target * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [seen, target, delay]);
+
+  return (
+    <div className="stat" ref={ref}>
+      <div className="stat-num">{n}{hasPlus && <span className="plus">+</span>}</div>
+      <div className="stat-label">{label}</div>
+      <div className="stat-sub">{sub}</div>
+    </div>
+  );
 }
 
 // ============== SERVICE CATEGORY PAGE (Architecture / Interior / Planning) ==============
@@ -480,7 +591,7 @@ function StudioPage({ onNav, onSection }) {
           <FadeUp>
             <div style={{ background: "rgba(94,80,71,0.18)", borderRadius: 40, padding: "44px clamp(36px,4vw,72px)" }}>
               <div className="eyebrow no-rule" style={{ color: "var(--c-tan-soft)", fontSize: 12, letterSpacing: "0.22em", marginBottom: 8 }}>{s.principal.role}</div>
-              <h3 className="display" style={{ color: "var(--c-tan-soft)", fontSize: 28, letterSpacing: "0.02em", marginBottom: 24, fontFamily: "var(--f-body)", fontWeight: 700 }}>{s.principal.name}</h3>
+              <h3 className="display" style={{ color: "var(--c-tan-soft)", fontSize: 28, letterSpacing: "0.02em", marginBottom: 24, fontFamily: "var(--f-body)", fontWeight: 600 }}>{s.principal.name}</h3>
               {s.principal.bio.map((p, i) =>
               <p key={i} style={{ fontFamily: "var(--f-body)", fontSize: 16, lineHeight: "26px", color: "#fff", marginBottom: 14 }}>{p}</p>
               )}
@@ -493,7 +604,7 @@ function StudioPage({ onNav, onSection }) {
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container" style={{ maxWidth: 1620 }}>
           <FadeUp>
-            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 18, fontFamily: "var(--f-body)", fontWeight: 700 }}>A BLEND OF TALENT AND CREATIVITY</h3>
+            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 18, fontFamily: "var(--f-body)", fontWeight: 600 }}>A BLEND OF TALENT AND CREATIVITY</h3>
             <p className="about-p" style={{ marginBottom: 40, color: "#fff", maxWidth: 1280, marginLeft: 0, textAlign: "left", fontSize: 16, lineHeight: "26px" }}>{s.teamIntro}</p>
             <div style={{ display: "flex", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
               {[1, 2, 3, 4, 5].map((i) =>
@@ -513,14 +624,14 @@ function StudioPage({ onNav, onSection }) {
       <section className="section">
         <div className="container" style={{ maxWidth: 1620 }}>
           <FadeUp>
-            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 32, fontFamily: "var(--f-body)", fontWeight: 700, textTransform: "uppercase" }}>WHAT MAKES US DIFFERENT</h3>
+            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 32, fontFamily: "var(--f-body)", fontWeight: 600, textTransform: "uppercase" }}>WHAT MAKES US DIFFERENT</h3>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }} className="diff-grid">
               {s.differentiators.map((d, i) =>
               <FadeUp key={i} delay={i % 2 * 60} style={{ background: "rgba(94,80,71,0.22)", borderRadius: 30, padding: "22px 28px", display: "flex", alignItems: "center", gap: 22 }}>
                   <span style={{ width: 56, height: 56, borderRadius: 16, background: "rgba(208,179,137,0.18)", display: "inline-flex", alignItems: "center", justifyContent: "center", color: "var(--c-tan)", flexShrink: 0 }}>
                     {Icon.svc && Icon.svc.newBuild}
                   </span>
-                  <span style={{ fontFamily: "var(--f-body)", fontWeight: 700, fontSize: 16, color: "#fff", letterSpacing: "0.04em", textTransform: "uppercase" }}>{d.t}</span>
+                  <span style={{ fontFamily: "var(--f-body)", fontWeight: 600, fontSize: 16, color: "#fff", letterSpacing: "0.04em", textTransform: "uppercase" }}>{d.t}</span>
                 </FadeUp>
               )}
             </div>
@@ -532,11 +643,11 @@ function StudioPage({ onNav, onSection }) {
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container" style={{ maxWidth: 1620 }}>
           <FadeUp>
-            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 24, fontFamily: "var(--f-body)", fontWeight: 700, textTransform: "uppercase" }}>DESIGN WITH PURPOSE</h3>
+            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 24, fontFamily: "var(--f-body)", fontWeight: 600, textTransform: "uppercase" }}>DESIGN WITH PURPOSE</h3>
             {s.designPurpose.map((p, i) =>
             <p key={i} style={{ fontFamily: "var(--f-body)", fontSize: 16, lineHeight: "26px", color: "#fff", marginBottom: 18 }}>{p}</p>
             )}
-            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginTop: 40, marginBottom: 18, fontFamily: "var(--f-body)", fontWeight: 700, textTransform: "uppercase" }}>YOUR VISION, OUR EXPERTISE</h3>
+            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginTop: 40, marginBottom: 18, fontFamily: "var(--f-body)", fontWeight: 600, textTransform: "uppercase" }}>YOUR VISION, OUR EXPERTISE</h3>
             <p style={{ fontFamily: "var(--f-body)", fontSize: 16, lineHeight: "26px", color: "#fff" }}>{s.yourVision}</p>
           </FadeUp>
         </div>
@@ -546,11 +657,11 @@ function StudioPage({ onNav, onSection }) {
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container" style={{ maxWidth: 1620 }}>
           <FadeUp>
-            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 32, fontFamily: "var(--f-body)", fontWeight: 700, textTransform: "uppercase" }}>GUIDED BY CORE VALUES</h3>
+            <h3 className="display" style={{ fontSize: 22, letterSpacing: "0.06em", color: "#fff", marginBottom: 32, fontFamily: "var(--f-body)", fontWeight: 600, textTransform: "uppercase" }}>GUIDED BY CORE VALUES</h3>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }} className="values-grid">
               {s.coreValues.map((v, i) =>
               <FadeUp key={v} delay={i * 50} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(208,179,137,0.18)", borderRadius: 24, padding: "180px 18px 22px", textAlign: "center" }}>
-                  <div style={{ fontFamily: "var(--f-body)", fontWeight: 700, fontSize: 14, color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase" }}>{v}</div>
+                  <div style={{ fontFamily: "var(--f-body)", fontWeight: 600, fontSize: 14, color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase" }}>{v}</div>
                 </FadeUp>
               )}
             </div>
@@ -567,7 +678,7 @@ function StudioPage({ onNav, onSection }) {
                 <Img src="assets/about-band.jpg" label="CTA band" style={{ width: "100%", height: "100%" }} />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(6,7,7,0.55), rgba(6,7,7,0.55))" }}></div>
               </div>
-              <h2 className="display" style={{ position: "relative", fontSize: "clamp(36px, 5vw, 70px)", color: "#fff", fontFamily: "var(--f-body)", fontWeight: 700, letterSpacing: "0.02em", marginBottom: 28, lineHeight: 1, textTransform: "uppercase" }}>WANT TO DISCUSS YOUR PROJECT?</h2>
+              <h2 className="display" style={{ position: "relative", fontSize: "clamp(36px, 5vw, 70px)", color: "#fff", fontFamily: "var(--f-body)", fontWeight: 600, letterSpacing: "0.02em", marginBottom: 28, lineHeight: 1, textTransform: "uppercase" }}>WANT TO DISCUSS YOUR PROJECT?</h2>
               <button className="why-more" style={{ position: "relative", padding: "14px 28px", fontSize: 14, letterSpacing: "0.2em" }} onClick={() => onSection("contact")}>GET IN TOUCH</button>
             </div>
           </FadeUp>
@@ -686,4 +797,4 @@ function ProjectDetail({ id, onNav }) {
 
 }
 
-Object.assign(window, { HomePage, OurServicesCarousel, ProjectsPage, ProjectDetail, ContactForm, ServiceCategoryPage, ServiceDetailPage, StudioPage });
+Object.assign(window, { HomePage, HeroCarousel, Stat, OurServicesCarousel, ProjectsPage, ProjectDetail, ContactForm, ServiceCategoryPage, ServiceDetailPage, StudioPage });

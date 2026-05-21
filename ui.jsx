@@ -48,7 +48,7 @@ const Icon = {
 function Logo({ onClick, big }) {
   return (
     <div className="logo" onClick={() => onClick && onClick("home")}>
-      <img src="assets/logo-white.png" alt="DiA Residential" className="logo-img" style={{ height: big ? 96 : 38 }} />
+      <span className="logo-img" role="img" aria-label="DiA Residential" style={{ height: big ? 96 : 38, width: big ? 280 : 110 }}></span>
     </div>);
 
 }
@@ -109,8 +109,8 @@ function Nav({ section, page, onNav, onSection }) {
     { id: "studio",   label: "OUR STUDIO",      icon: "studio",   action: () => onNav("studio") },
     { id: "how",      label: "HOW DO WE DO IT?", icon: "how",     action: () => onSection("why") },
     { id: "work",     label: "OUR WORK",        icon: "work",     action: () => onNav("projects") },
-    { id: "services", label: "OUR SERVICES",    icon: "services", action: () => onSection("services"), sub: true },
-    { id: "packages", label: "OUR PACKAGES",    icon: "packages", action: () => onSection("services"), sub: true },
+    { id: "services", label: "OUR SERVICES",    icon: "services", action: () => onNav("services"), sub: true },
+    { id: "packages", label: "OUR PACKAGES",    icon: "packages", action: () => onNav("packages", "architecture"), sub: true },
     { id: "contact",  label: "CONTACT US",      icon: "contact",  action: () => onSection("contact") }
   ];
   return (
@@ -134,7 +134,7 @@ function Nav({ section, page, onNav, onSection }) {
       </header>
       <div className={cx("menu-dropdown", menu && "open")}>
         <div className="menu-dd-head">
-          <img src="assets/logo-tan.png" alt="DiA" style={{ height: 18 }} />
+          <span className="logo-img" role="img" aria-label="DiA" style={{ height: 22, width: 64, backgroundColor: "var(--c-tan)" }}></span>
           <span className="menu-dd-residential">RESIDENTIAL</span>
         </div>
         <div className="menu-dd-divider"></div>
@@ -153,10 +153,10 @@ function Nav({ section, page, onNav, onSection }) {
 
 }
 
-function Rail({ onSection }) {
+function Rail({ onSection, onNav }) {
   return (
     <div className="rail">
-      <button className="rail-btn" onClick={() => onSection("services")}>
+      <button className="rail-btn" onClick={() => onNav ? onNav("services") : onSection("services")}>
         <div className="rail-icon">{Icon.svcIcon}</div>
         <div className="rail-label">Services</div>
       </button>
@@ -198,7 +198,7 @@ function Footer({ onNav, onSection }) {
     <footer className="foot">
       <div className="foot-card">
         <div className="foot-logo">
-          <img src="assets/logo-white.png" alt="DiA Residential" style={{ height: 70, width: "auto", display: "block" }} />
+          <span className="logo-img" role="img" aria-label="DiA Residential" style={{ height: 60, width: 180, display: "block" }}></span>
         </div>
         <div className="foot-office">
           <h4>{D.offices[0].city}</h4>
@@ -231,7 +231,8 @@ function Footer({ onNav, onSection }) {
             <li onClick={() => onSection("about")}>ABOUT US</li>
             <li onClick={() => onSection("why")}>HOW DO WE DO?</li>
             <li onClick={() => onNav("projects")}>OUR WORK</li>
-            <li onClick={() => onSection("services")}>OUR SERVICES</li>
+            <li onClick={() => onNav("services")}>OUR SERVICES</li>
+            <li onClick={() => onNav("packages", "architecture")}>OUR PACKAGES</li>
             <li onClick={() => onSection("contact")}>CONTACT US</li>
           </ul>
         </div>

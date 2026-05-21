@@ -16,7 +16,14 @@ window.DIA = {
     title: "We Turn Your Dreams Into Reality",
     tagline: "WE TURN YOUR DREAMS\nINTO REALITY",
     image: "assets/hero-1.png",
-    imageLabel: "HERO · 1920×1080"
+    imageLabel: "HERO · 1920×1080",
+    slides: [
+      { src: "assets/hero-1.png",        label: "Hero · interior" },
+      { src: "assets/about-banner.png",  label: "Hero · living" },
+      { src: "assets/svc-project.jpg",   label: "Hero · architecture" },
+      { src: "assets/about-band.jpg",    label: "Hero · kitchen" },
+      { src: "assets/svc-interior.jpg",  label: "Hero · interior 2" }
+    ]
   },
 
   about: {
@@ -146,55 +153,59 @@ window.DIA = {
   ],
 
   work: [
-    { id: "ravenhill", name: "Ravenhill House",   typology: "Conversion",  location: "Hampstead, London",     year: "2024", area: "412 m²",
-      cover: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=80", coverLabel: "RAVENHILL · atrium",
-      brief: "A late-Georgian terrace rebuilt around a triple-height stair void and a courtyard of polished travertine.",
+    { id: "project-01", name: "Project Name", typology: "Residential", location: "Location · UK", year: "—", area: "—",
+      cover: "assets/about-banner.png", coverLabel: "PROJECT",
+      brief: "Project brief — placeholder.",
       gallery: [
-        { src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=2000&q=80", l: "01 · stair void" },
-        { src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=2000&q=80", l: "02 · living room" },
-        { src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=2000&q=80", l: "03 · kitchen" },
-        { src: "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=2000&q=80", l: "04 · bedroom" },
-        { src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2000&q=80", l: "05 · bathroom" },
-        { src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=2000&q=80", l: "06 · courtyard" }
+        { src: "assets/about-banner.png", l: "01" },
+        { src: "assets/about-banner.png", l: "02" },
+        { src: "assets/about-banner.png", l: "03" },
+        { src: "assets/about-banner.png", l: "04" }
       ]},
-    { id: "almaza", name: "Almaza Bay Villa", typology: "New Build", location: "North Coast, Egypt", year: "2023", area: "680 m²",
-      cover: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1800&q=80", coverLabel: "ALMAZA · facade",
-      brief: "A coastal villa pitched between dune and dwelling. Slatted timber and lime-washed concrete temper the Mediterranean light.",
+    { id: "project-02", name: "Project Name", typology: "Residential", location: "Location · UK", year: "—", area: "—",
+      cover: "assets/about-banner.png", coverLabel: "PROJECT",
+      brief: "Project brief — placeholder.",
       gallery: [
-        { src: "https://images.unsplash.com/photo-1600566753051-6057f1fa6e26?w=2000&q=80", l: "01 · approach" },
-        { src: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=2000&q=80", l: "02 · pool" },
-        { src: "https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=2000&q=80", l: "03 · living" },
-        { src: "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?w=2000&q=80", l: "04 · kitchen" }
+        { src: "assets/about-banner.png", l: "01" },
+        { src: "assets/about-banner.png", l: "02" },
+        { src: "assets/about-banner.png", l: "03" },
+        { src: "assets/about-banner.png", l: "04" }
       ]},
-    { id: "fitzrovia", name: "Fitzrovia Apartment", typology: "Interior", location: "Fitzrovia, London", year: "2024", area: "186 m²",
-      cover: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=1800&q=80", coverLabel: "FITZROVIA · living",
-      brief: "Two-floor reorganisation inside a 1930s mansion block. The brief was a single sentence: 'fewer rooms, more light.'",
+    { id: "project-03", name: "Project Name", typology: "Residential", location: "Location · UK", year: "—", area: "—",
+      cover: "assets/about-banner.png", coverLabel: "PROJECT",
+      brief: "Project brief — placeholder.",
       gallery: [
-        { src: "https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?w=2000&q=80", l: "01 · entry" },
-        { src: "https://images.unsplash.com/photo-1615873968403-89e068629265?w=2000&q=80", l: "02 · library" },
-        { src: "https://images.unsplash.com/photo-1616137148650-4aa14651e02d?w=2000&q=80", l: "03 · dining" }
+        { src: "assets/about-banner.png", l: "01" },
+        { src: "assets/about-banner.png", l: "02" },
+        { src: "assets/about-banner.png", l: "03" },
+        { src: "assets/about-banner.png", l: "04" }
       ]},
-    { id: "kestrel", name: "Kestrel Barn", typology: "Conversion", location: "Kent, UK", year: "2022", area: "340 m²",
-      cover: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1800&q=80", coverLabel: "KESTREL · oast",
-      brief: "A 19th-century oast house converted to a primary residence with a glass spine. The kilns stayed; everything between was rewritten.",
+    { id: "project-04", name: "Project Name", typology: "Residential", location: "Location · UK", year: "—", area: "—",
+      cover: "assets/about-banner.png", coverLabel: "PROJECT",
+      brief: "Project brief — placeholder.",
       gallery: [
-        { src: "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?w=2000&q=80", l: "01 · spine" },
-        { src: "https://images.unsplash.com/photo-1600585152915-d208bec867a1?w=2000&q=80", l: "02 · living" },
-        { src: "https://images.unsplash.com/photo-1600210491369-e753d80a41f3?w=2000&q=80", l: "03 · study" }
+        { src: "assets/about-banner.png", l: "01" },
+        { src: "assets/about-banner.png", l: "02" },
+        { src: "assets/about-banner.png", l: "03" },
+        { src: "assets/about-banner.png", l: "04" }
       ]},
-    { id: "zamalek", name: "Zamalek Residence", typology: "Renovation", location: "Zamalek, Cairo", year: "2023", area: "295 m²",
-      cover: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1800&q=80", coverLabel: "ZAMALEK · salon",
-      brief: "A belle-époque apartment returned to its plan, with one wall removed and a century of paint with it.",
+    { id: "project-05", name: "Project Name", typology: "Residential", location: "Location · UK", year: "—", area: "—",
+      cover: "assets/about-banner.png", coverLabel: "PROJECT",
+      brief: "Project brief — placeholder.",
       gallery: [
-        { src: "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?w=2000&q=80", l: "01 · salon" },
-        { src: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=2000&q=80", l: "02 · bedroom" }
+        { src: "assets/about-banner.png", l: "01" },
+        { src: "assets/about-banner.png", l: "02" },
+        { src: "assets/about-banner.png", l: "03" },
+        { src: "assets/about-banner.png", l: "04" }
       ]},
-    { id: "marsa", name: "Marsa Matruh House", typology: "New Build", location: "Marsa Matruh, Egypt", year: "2025", area: "520 m²",
-      cover: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1800&q=80", coverLabel: "MARSA · facade",
-      brief: "A summer residence buried half a metre into the dune, designed to disappear from the road and unfold toward the sea.",
+    { id: "project-06", name: "Project Name", typology: "Residential", location: "Location · UK", year: "—", area: "—",
+      cover: "assets/about-banner.png", coverLabel: "PROJECT",
+      brief: "Project brief — placeholder.",
       gallery: [
-        { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2000&q=80", l: "01 · approach" },
-        { src: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=2000&q=80", l: "02 · pool" }
+        { src: "assets/about-banner.png", l: "01" },
+        { src: "assets/about-banner.png", l: "02" },
+        { src: "assets/about-banner.png", l: "03" },
+        { src: "assets/about-banner.png", l: "04" }
       ]}
   ],
 
@@ -245,5 +256,57 @@ window.DIA = {
     { city: "CAIRO, EG",  addr: "311 HYDE PARK BUSINESS PLAZA, NEW CAIRO", tel: "(+20) 222 222 753", mail: "hello.eg@dia-eg.com" }
   ],
 
-  sitemap: ["HOME", "ABOUT US", "HOW DO WE DO?", "OUR WORK", "OUR SERVICES", "CONTACT US"]
+  sitemap: ["HOME", "ABOUT US", "HOW DO WE DO?", "OUR WORK", "OUR SERVICES", "CONTACT US"],
+
+  // ============== Architecture Packages — BRONZE / SILVER / GOLD / PLATINUM ==============
+  archPackages: {
+    tagline: "Architectural excellence and interior brilliance — all in one thoughtfully designed package.",
+    intro: "Four bundles to take a project from a clear plot to a finished home, sized to where you are in the journey. Pick the level of involvement, not the quality — the same studio runs every package, top to bottom.",
+    tiers: [
+      { id: "bronze",   name: "BRONZE",   tone: "bronze",
+        blurb: "The starting bundle: a clear set of drawings and a planning submission, for owners who already have a builder and want the architectural backbone done right.",
+        deliverables: ["Survey & Existing", "Stage 2 & 3", "Planning Submission"],
+        outcome: "A consented scheme and a tender-ready drawing set — ready to hand to your contractor with confidence." },
+      { id: "silver",   name: "SILVER",   tone: "silver",
+        blurb: "Bronze plus the full construction package — detailed technical drawings and on-site coordination through the build phase.",
+        deliverables: ["Survey & Existing", "Stage 2 & 3", "Planning Submission", "Construction Phase", "Construction Drawings"],
+        outcome: "A buildable, signed-off house with construction drawings the contractor actually wants to receive — fewer site queries, fewer surprises." },
+      { id: "gold",     name: "GOLD",     tone: "gold",
+        blurb: "Silver plus Building Control sign-off, contractor selection, and weekly project management on site — for clients who want a single accountable team running the build.",
+        deliverables: ["Survey & Existing", "Stage 2 & 3", "Planning Submission", "Construction Phase", "Construction Drawings", "Building Control", "Building Works", "Approval", "Project Management Services"],
+        outcome: "A finished, regulatory-signed-off home, delivered on programme — with one principal accountable from breaking ground to keys." },
+      { id: "platinum", name: "PLATINUM", tone: "platinum",
+        blurb: "Our full turnkey service: architecture, interiors, and construction under a single contract. We hand over a finished home and a bound dossier.",
+        deliverables: ["Survey & Existing", "Stage 2 & 3", "Planning Submission", "Construction Phase", "Construction Drawings", "Building Control", "Building Works", "Approval", "Project Management Services", "Design & Build Service"],
+        outcome: "A turnkey home — furnished, finished, and photographed — delivered through a single contract with a single point of contact." }
+    ]
+  },
+
+  // ============== Interior Design Packages — six service cards ==============
+  interiorPackages: {
+    tagline: "Architectural excellence and interior brilliance — all in one thoughtfully designed package.",
+    cards: [
+      { id: "consultation", name: "Design Consultation Services",
+        whatsIncluded: [
+          { t: "2-hour Consultation",   b: "Dive into all things layout, lifestyle, practicality, and inspiration, with expert problem-solving along the way." },
+          { t: "Actionable Notes & Design Inspirations", b: "Detailed notes and curated visuals to support your vision and guide your next steps." },
+          { t: "Layout Suggestion",     b: "A custom layout drawing tailored to your space and needs." },
+          { t: "15-minute Follow-up Call", b: "A complimentary follow-up to address any additional questions or ideas." }
+        ],
+        types: { label: "Types of consultations we offer", items: ["Design Insights Session", "Colour & Material Consultation", "Virtual Mood Boards"] } },
+      { id: "solutions",    name: "Interior Design Solutions",
+        types: { label: "Interior design options", items: ["Design Insights Session", "Colour & Material Consultation", "Virtual Mood Boards"] } },
+      { id: "curated",      name: "Curated Design & Sourcing",
+        types: { label: "What's included", items: ["Bespoke Storage & Joinery", "Furniture & Décor Sourcing", "Textile & Soft Furnishings Design & Sourcing"] } },
+      { id: "renovation",   name: "Renovation & Remodeling",
+        whatsIncluded: [
+          { t: "Kitchen & Bathroom Renovation", b: "Full redesigns for kitchen & bathrooms — including layout, cabinetry, and finishes." },
+          { t: "Home Renovation", b: "Structural changes, such as opening up spaces, reconfiguring layouts, or extending rooms." }
+        ] },
+      { id: "lighting",     name: "Lighting Design",
+        types: { label: "What's included", items: ["Lighting Plans", "Smart Lighting Solutions"] } },
+      { id: "viz",          name: "3D Visualisation & Virtual Design",
+        types: { label: "What's included", items: ["3D Renderings", "Virtual Tours"] } }
+    ]
+  }
 };
